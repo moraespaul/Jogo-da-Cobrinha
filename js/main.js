@@ -37,20 +37,21 @@ function update(event){
     if(event.keyCode == 39 && direction != 'left') direction = 'right'
     if(event.keyCode == 40 && direction != 'up') direction = 'down'
 
+    
 }
 
 function inicarJogo(){
-
+    
     if(cobra[0].x > 15 * box && direction == 'right') cobra[0].x = 0
     if(cobra[0].x < 0 && direction == 'left') cobra[0].x = 16 * box
     if(cobra[0].y > 15 * box && direction == 'down') cobra[0].y = 0
     if(cobra[0].y < 0 && direction == 'up') cobra[0].y = 16 * box
-
+    
     
     criarBG();
     criarCobra();
     CriarAlimento();
-
+    
     let cobrax = cobra[0].x 
     let cobray = cobra[0].y
 
@@ -58,9 +59,17 @@ function inicarJogo(){
     if(direction == 'left') cobrax -= box
     if(direction == 'up') cobray -= box
     if(direction == 'down') cobray += box
+    
+    if(cobrax != comida.x || cobray != comida.y){
+        
+        cobra.pop();
+    }else{
+        
+        comida.x = Math.floor(Math.random() * 15 + 1) * box
+        comida.y = Math.floor(Math.random() * 15 + 1) * box
 
-    cobra.pop();
-
+    }
+    
     let novaCabeca = {
         x: cobrax,
         y: cobray
